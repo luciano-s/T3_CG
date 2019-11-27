@@ -48,30 +48,30 @@ class App:
 
 
 	def draw_obj_1(self):
-		x_points = [i for i in range(int(self.center_x)+10, int(self.center_x)+31)]
-		y_points = [i for i in range(int(self.center_y)+20, int(self.center_y)+41)]
+		x_points = [i for i in range(10, 31)]
+		y_points = [i for i in range(20, 41)]
 		color = '#0000ff'
 		for x in x_points:
 			for y in y_points:
 				z = x*x + y
-				if self.z_buffer[x][y] < z:
+				if self.z_buffer[x+self.center_x][self.center_y-y] < z:
 					# print(f'x: {x} y:{y}')
-					self.z_buffer[x][y] = z
-					self.color_buffer[x][y] = color
+					self.z_buffer[x+self.center_x][self.center_y-y] = z
+					self.color_buffer[x+self.center_x][self.center_y-y] = color
 
 
 
 	def draw_obj_2(self):
-		x_points = [i for i in range(int(self.center_x)+50, int(self.center_x)+101)]
-		y_points = [i for i in range(int(self.center_y)+30, int(self.center_y)+81)]
+		x_points = [i for i in range(50, 101)]
+		y_points = [i for i in range(30, 81)]
 		color = '#ff0000'
 		
 		for x in x_points:
 			for y in y_points:
 				z = 3*x + 2*y + 5
-				if self.z_buffer[x][y] < z:
-					self.z_buffer[x][y] = z
-					self.color_buffer[x][y] = color
+				if self.z_buffer[x+self.center_x][self.center_y-y] < z:
+					self.z_buffer[x+self.center_x][self.center_y-y] = z
+					self.color_buffer[x+self.center_x][self.center_y-y] = color
 
 
 
@@ -86,9 +86,9 @@ class App:
 				# print(f'x: {x}, y:{y}')
 				# 	print(f'x:{self.center_x}, y:{self.center_y}')
 				
-				if self.z_buffer[x+self.center_x][y+self.center_y] < z:
-					self.z_buffer[x+self.center_x][y+self.center_y] = z
-					self.color_buffer[x+self.center_x][y+self.center_y] = color
+				if self.z_buffer[x+self.center_x][self.center_y-y] < z:
+					self.z_buffer[x+self.center_x][self.center_y-y] = z
+					self.color_buffer[x+self.center_x][self.center_y-y] = color
 
 
 	def draw_obj_4(self):
@@ -99,9 +99,9 @@ class App:
 				x = int(100+30*math.cos(alpha)*math.cos(beta))
 				y = int(50+30*math.cos(alpha)*math.sin(beta))
 				
-				if (self.z_buffer[self.center_x+x][self.center_y+y] < z):
-					self.z_buffer[x+self.center_x][y+self.center_y] = z
-					self.color_buffer[x+self.center_x][y+self.center_y] = color				
+				if (self.z_buffer[self.center_x+x][self.center_y-y] < z):
+					self.z_buffer[x+self.center_x][self.center_y-y] = z
+					self.color_buffer[x+self.center_x][self.center_y-y] = color				
 
 
 
@@ -110,9 +110,9 @@ class App:
 		for x in range(0,41):
 			for y in range(0, 41):
 				for z in range(0, 41):
-					if(self.z_buffer[x+self.center_x][self.center_y+y] < z):
-						self.z_buffer[self.center_x+x][self.center_y+y] = z
-						self.color_buffer[self.center_x+x][self.center_y+y] = color				
+					if(self.z_buffer[x+self.center_x][self.center_y-y] < z):
+						self.z_buffer[self.center_x+x][self.center_y-y] = z
+						self.color_buffer[self.center_x+x][self.center_y-y] = color				
 
 
 		
