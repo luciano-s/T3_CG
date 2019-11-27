@@ -18,6 +18,8 @@ class App:
 		self.draw_obj_1()
 		self.draw_obj_2()
 		self.draw_obj_3()
+		self.draw_obj_4()
+		self.draw_obj_5()
 		self.draw_color_buffer()
 
 	def fill_buffer(self):
@@ -75,14 +77,14 @@ class App:
 
 	def draw_obj_3(self):
 		color = '#ffff00'
-		for t in range(0, 31):
-			for alpha in np.arange(0, 2*math.pi, 0.0001):
+		for t in range(0, 51):
+			for alpha in np.arange(0, 2*math.pi, 0.01):
 				# print(alpha)
 				z = 10+t
 				x = int(30 + t * math.cos(alpha))
 				y = int(50 + t*math.sin(alpha))
 				# print(f'x: {x}, y:{y}')
-				# print(f'x:{self.center_x}, y:{self.center_y}')
+				# 	print(f'x:{self.center_x}, y:{self.center_y}')
 				
 				if self.z_buffer[x+self.center_x][y+self.center_y] < z:
 					self.z_buffer[x+self.center_x][y+self.center_y] = z
@@ -90,11 +92,27 @@ class App:
 
 
 	def draw_obj_4(self):
-		pass
+		color = '#00ff00'
+		for alpha in np.arange(0, 2*math.pi, .01):
+			for beta in np.arange(0, 2*math.pi, .01):
+				z = 20+30*math.sin(alpha)
+				x = int(100+30*math.cos(alpha)*math.cos(beta))
+				y = int(50+30*math.cos(alpha)*math.sin(beta))
+				
+				if (self.z_buffer[self.center_x+x][self.center_y+y] < z):
+					self.z_buffer[x+self.center_x][y+self.center_y] = z
+					self.color_buffer[x+self.center_x][y+self.center_y] = color				
+
 
 
 	def draw_obj_5(self):
-		pass
+		color = '#ffffff'
+		for x in range(0,41):
+			for y in range(0, 41):
+				for z in range(0, 41):
+					if(self.z_buffer[x+self.center_x][self.center_y+y] < z):
+						self.z_buffer[self.center_x+x][self.center_y+y] = z
+						self.color_buffer[self.center_x+x][self.center_y+y] = color				
 
 
 		
